@@ -7,7 +7,8 @@ def home(request):
     experience = Experience.objects
     project = Project.objects
     skills = Skill.objects
-    return render(request, 'jobs/home.html',{'jobs':jobs, 'summary':summary, 'exp' : experience,'proj' : project, 'skill':skills})
+    awards = Awards.objects
+    return render(request, 'jobs/home.html',{'jobs':jobs, 'summary':summary, 'exp' : experience,'proj' : project, 'skill':skills,'awards':awards})
 
 def home_2(request):
     jobs = Job.objects

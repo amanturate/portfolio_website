@@ -26,18 +26,13 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar" id="navbar-example2">
     <div class="container">
-      <a class="navbar-brand" href="{% url 'home'%}" style="font-family: 'Charm', cursive;">Aman Turate</a>
+      <a class="navbar-brand" href=# style="font-family: 'Charm', cursive;">Aman Turate</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-auto smooth-scroll">
-          <li class="nav-item">
-            <a class="nav-link" href="#intro">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
+                    <li class="nav-item">
             <a class="nav-link" href="#about" data-offset="90">About</a>
           </li>
           <li class="nav-item">
@@ -86,18 +81,18 @@
       <div class="container px-md-3 px-sm-0">
         <!--Grid row-->
         <div class="row wow fadeIn">
+          
           <!--Grid column-->
-          <div class="col-md-12 mb-4 white-text text-center wow fadeIn">
-
-            <h3 class="display-3 font-weight-bold white-text mb-0 pt-md-5 pt-5" style="font-family: 'Charm', cursive;">
-              <img src="/static/images/photo.jpeg" class="rounded-circle" alt="Cinque Terre" width="100" height="100" style=" display:inline;">
-
-               Hi I'm Aman</h3>
+          <div class="typewriter col-md-12 mb-4 white-text text-center wow fadeIn">
+            <img src="/static/images/photo.jpeg" class="rounded-circle" alt="Cinque Terre" width="100" height="100" style="display: inline" >
+              <h3 class="display-3 font-weight-bold white-text mb-0" style="font-family: 'Charm', cursive;">
+                
+                  Hi I'm Aman</h3>
             <hr class="hr-light my-4 w-75">
 
-              <h3 class="subtext-header mt-2"> Associate Consultant at Capgemini
+              <h4 class="subtext-header mt-2"> Analyst at Capgemini
 
-              </h3>
+              </h4>
 
 
             <a href="/static/files/CV.pdf" class="btn btn-rounded btn-outline-white mt-3">
@@ -283,7 +278,7 @@
 
           <div class="row text-center">
             {%for skills in skill.all%}
-            <div class="col-2 text-center my-auto">
+            <div class="col-4 text-center my-auto">
               <div class="card bg-info card-block d-flex">
                 <div class="card-body align-items-center d-flex text-white justify-content-center">
                   {{skills.name}}
@@ -306,20 +301,38 @@
             <!-- Section heading -->
             <h2 class="h1-responsive font-weight-bold mb-5">Awards</h2>
               <div class="row">
-              <div class="card text-center col-6">
+                {%for awards in awards.all%}
+              <div class="card bg-primary text-center col-6 text-white">
                 <div class="card-header">
-                  Featured
+                  {{awards.company}}
                 </div>
-                <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                <div class="card-body ">
+                  <h5 class="card-title">{{awards.name}}</h5>
+                  <p class="card-text text-white">{{awards.Description}}</p>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cert_{{forloop.counter}}">Certificate</button>
                 </div>
-                <div class="card-footer text-muted">
-                  2 days ago
+                <div class="card-footer">
+                  {{awards.date|date:"Y"}}
                 </div>
               </div>
+                <div id="cert_{{forloop.counter}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="cert_{{forloop.counter}}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="img">
+              <div class="modal-content bg-info">
+                  <div class="modal-body">
+                    <img src="{{awards.cert.url}}" class="img-responsive" style="height: 100%; width: 100%;">
+                  </div>
+                <div class="modal-footer">
+                  <form method="get" action="{{awards.cert.url}}">
+                  <button type="submit" class="btn btn-info text-white">View Certificate</button>
+                  </form>
+        <button type="button" class="btn btn-info text-white" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
           </div>
+                {% endfor %}
+          </div>
+          
         </div>
         <!-- Container -->
 
@@ -330,7 +343,10 @@
     <section id="contact" class="py-5" style="background-color: #eee;">
 
         <div class="container">
-
+          <h2 class="h1-responsive font-weight-bold mb-5 text-center">Contact</h2>
+          <p class="lead">Aman Turate</p>
+          <p class="lead">turateaman1995@gmail.com</p>
+          <p class="lead">Conatct : 9320822900</p>
         </div>
 
     </section>

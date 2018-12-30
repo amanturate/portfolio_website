@@ -30,6 +30,7 @@ class Skill(models.Model):
     
 class Awards(models.Model):
     name = models.CharField(max_length=150)
+    company = models.CharField(max_length=150, default="")
     Description = models.TextField(default="")
     date = models.DateField()
-    url = models.TextField()
+    cert = models.ImageField(upload_to = 'images/',blank=True)
