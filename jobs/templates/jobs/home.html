@@ -44,13 +44,13 @@
             <a class="nav-link" href="#experience" data-offset="90">Experience</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#services" data-offset="90">Services</a>
+            <a class="nav-link" href="#project" data-offset="90">Projects</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#opinions" data-offset="30">Opinions</a>
+            <a class="nav-link" href="#skills" data-offset="30">Skills</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#team" data-offset="90">Team</a>
+            <a class="nav-link" href="#award" data-offset="90">Awards</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#contact" data-offset="90">Contact</a>
@@ -79,7 +79,7 @@
   </nav>
   <!-- Navbar -->
   <!-- Full Page Intro -->
-  <div class="view" id="intro">
+  <div class="view" id="intro" >
     <!-- Mask & flexbox options-->
     <div class="mask rgba-gradient d-flex justify-content-center align-items-center">
       <!-- Content -->
@@ -95,9 +95,9 @@
                Hi I'm Aman</h3>
             <hr class="hr-light my-4 w-75">
 
-<h3 class="subtext-header mt-2"> Associate Consultant at Capgemini
+              <h3 class="subtext-header mt-2"> Associate Consultant at Capgemini
 
-</h3>
+              </h3>
 
 
             <a href="/static/files/CV.pdf" class="btn btn-rounded btn-outline-white mt-3">
@@ -119,7 +119,7 @@
 <main data-spy="scroll" data-target="#navbar-example2" data-offset="0">
 
     <!--Section: about-->
-    <section id="about" class="text-justify py-5">
+    <section id="about" class="text-justify py-5" >
 
         <!-- Container -->
         <div class="container ">
@@ -133,32 +133,30 @@
         <div class="row">
 
                     <!-- Grid column -->
-                    <div class="col-lg-5 text-center" >
+                    <div class="col-lg-5 text-center mb-2" >
                         <img class="img-fluid " src="/static/images/robot_bg.jpg" alt="Sample image" >
                     </div>
                     <!-- Grid column -->
 
                     <!-- Grid column -->
                     <div class="col-lg-7">
-{%for sum in summary.all%}
-                        <!-- Grid row -->
-                        <div class="row mb-3">
+                        {%for sum in summary.all%}
+                            <!-- Grid row -->
+                            <div class="row mb-3">
 
-                            <!-- Grid column -->
-                            <div class="col-1">
-                                <i class="far fa-hand-point-right blue-text fa-lg"></i>
+                                <!-- Grid column -->
+                                <div class="col-1">
+                                    <i class="far fa-hand-point-right blue-text fa-lg"></i>
+                                </div>
+
+                                <!-- Grid column -->
+                                <div class="col-xl-10 col-md-11 col-10">
+                                    <p class="grey-text">{{ sum.summary }}</p>
+                                </div>
+
                             </div>
-                            <!-- Grid column -->
-
-                            <!-- Grid column -->
-                            <div class="col-xl-10 col-md-11 col-10">
-                                <p class="grey-text">{{ sum.summary }}</p>
-                            </div>
-                            <!-- Grid column -->
-
-                        </div>
-                        <!-- Grid row -->
-{%endfor%}
+                            <!-- Grid row -->
+                        {%endfor%}
 
                     </div>
                     <!--Grid column-->
@@ -170,7 +168,7 @@
     </section>
     <!--Section: about-->
 
-    <!--Section: projects-->
+    <!--Section: experience-->
     <section id="experience" class="text-center py-5" style="background-color: #eee;" >
 
         <!-- Container -->
@@ -180,22 +178,21 @@
             <h2 class="h1-responsive font-weight-bold mb-5">Experience</h2>
             <!-- Section description -->
             {% for exps in exp.all|dictsortreversed:"start_dt"%}
-            <div class="card text-white bg-info text-center col-lg-6">
-  <div class="card-header lead">
-    {{exps.company}}
-  </div>
-  <div class="card-body">
-    <h5 class="card-title">{{exps.position}}</h5>
-    <p class="card-text text-white">
-location : {{exps.location}}
-
-    </p>
-  </div>
-  <div class="card-footer">
-    {{exps.start_dt |date:"M/Y"}} - {%if exps.now == True %}Now {%else%} {{exps.end_dt |date:"M/Y"}} {%endif%}
-  </div>
-</div>
-{%endfor%}
+                <div class="card text-white bg-info text-center col-lg-6">
+                    <div class="card-header lead">
+                        {{exps.company}}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{exps.position}}</h5>
+                        <p class="card-text text-white">
+                                location : {{exps.location}}
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        {{exps.start_dt |date:"M/Y"}} - {%if exps.now == True %}Now {%else%} {{exps.end_dt |date:"M/Y"}} {%endif%}
+                    </div>
+                </div>  
+            {%endfor%}
         </div>
         <!-- Container -->
 
@@ -203,18 +200,72 @@ location : {{exps.location}}
     <!--Section: projects-->
 
     <!--Section: gallery-->
-    <section id="gallery" class="text-center py-5">
+    <section id="project" class="text-center py-5">
 
         <!-- Container -->
         <div class="container">
 
             <!-- Section heading -->
-            <h2 class="h1-responsive font-weight-bold mb-5">Our best projects</h2>
+            <h2 class="h1-responsive font-weight-bold mb-5">Projects</h2>
             <!-- Section description -->
-            <p class="grey-text w-responsive mx-auto mb-5">Duis aute irure dolor in reprehenderit in
-                voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat non proident, sunt in culpa qui officia deserunt mollit est laborum.</p>
+            <div class="accordion" id="accordionExample">
+              {%for proj in proj.all|dictsortreversed:"start_dt"%}
+              <div class="card bg-primary">
+                <div class="card-header" id="_{{forloop.counter}}">
+                  <h2 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#card_{{forloop.counter}}" aria-expanded="false" aria-controls="card_{{forloop.counter}}" style="color: ghostwhite !important">
+                       {{proj.name}}
+                    </button>
+                  </h2>
+                </div>
 
+                <div id="card_{{forloop.counter}}" class="collapse" aria-labelledby="card_{{forloop.counter}}" data-parent="#accordionExample">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-lg-9">
+                        {%if proj.desc_1 != ""%}
+                        <div class="row" style="flex-wrap: nowrap !important">
+                          <div class="col-1">
+                            <i class="far fa-hand-point-right text-white fa-lg"></i>
+                          </div>
+                          <div clas="col-10" style="text-align: left;">
+                            <p class="text-white">{{proj.desc_1}}</p>
+                          </div>
+                        </div>
+                        {%endif%}
+                        
+                        {%if proj.desc_2 != ""%}
+                        <div class="row" style="flex-wrap: nowrap !important">
+                          <div class="col-1">
+                            <i class="far fa-hand-point-right text-white fa-lg"></i>
+                          </div>
+                          <div clas="col-10" style="text-align: left;">
+                            <p class="text-white">{{proj.desc_2}}</p>
+                          </div>
+                        </div>
+                        {%endif%}
+                        
+                        {%if proj.desc_3 != ""%}
+                        <div class="row" style="flex-wrap: nowrap !important">
+                          <div class="col-1">
+                            <i class="far fa-hand-point-right text-white fa-lg"></i>
+                          </div>
+                          <div clas="col-10" style="text-align: left;">
+                            <p class="text-white">{{proj.desc_3}}</p>
+                          </div>
+                        </div>
+                        {%endif%}
+                      </div>
+                      <div class="col-lg-3">
+                        <p class="text-white text-right">{{proj.company}} <br>
+                        {{proj.start_dt|date:"M/Y"}} - {{proj.end_dt |date:"M/Y"}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {%endfor%}
+  </div>
         </div>
         <!-- Container -->
 
@@ -222,37 +273,53 @@ location : {{exps.location}}
     <!--Section: gallery-->
 
     <!--Section: testimonials-->
-    <section id="testimonials" class="text-center py-5" style="background-color: #eee;">
+    <section id="skills" class="text-center py-5" style="background-color: #eee;">
 
         <!-- Container -->
         <div class="container">
 
             <!-- Section heading -->
-            <h2 class="h1-responsive font-weight-bold mb-5">Testimonials</h2>
+            <h2 class="h1-responsive font-weight-bold mb-5">Skills</h2>
 
+          <div class="row text-center">
+            {%for skills in skill.all%}
+            <div class="col-2 text-center my-auto">
+              <div class="card bg-info card-block d-flex">
+                <div class="card-body align-items-center d-flex text-white justify-content-center">
+                  {{skills.name}}
+                </div>
+              </div>
+            </div>
+            {%endfor%}
+          </div>
         </div>
         <!-- Container -->
 
     </section>
-    <!--Section: testimonials-->
-
-    <!--Section: call to action-->
-    <section id="">
-
-
-
-    </section>
-    <!--Section: call to action-->
 
     <!--Section: articles-->
-    <section id="articles" class="text-center py-5">
+    <section id="award" class="text-center py-5">
 
         <!-- Container -->
         <div class="container">
 
             <!-- Section heading -->
-            <h2 class="h1-responsive font-weight-bold mb-5">Articles</h2>
-
+            <h2 class="h1-responsive font-weight-bold mb-5">Awards</h2>
+              <div class="row">
+              <div class="card text-center col-6">
+                <div class="card-header">
+                  Featured
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+                <div class="card-footer text-muted">
+                  2 days ago
+                </div>
+              </div>
+          </div>
         </div>
         <!-- Container -->
 

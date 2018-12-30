@@ -4,13 +4,13 @@ from .models import *
 def home(request):
     jobs = Job.objects
     summary = Summary.objects
-    print(summary.all)
     experience = Experience.objects
-    print(type(experience))
-    return render(request, 'jobs/home.html',{'jobs':jobs, 'summary':summary, 'exp' : experience})
+    project = Project.objects
+    skills = Skill.objects
+    return render(request, 'jobs/home.html',{'jobs':jobs, 'summary':summary, 'exp' : experience,'proj' : project, 'skill':skills})
 
 def home_2(request):
     jobs = Job.objects
     summary = Summary.objects
 
-    return render(request, 'jobs/home_2.html',{'jobs':jobs, 'summary':summary})
+    return render(request, 'jobs/home_.html',{'jobs':jobs, 'summary':summary})
