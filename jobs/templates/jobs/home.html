@@ -1,16 +1,17 @@
 <!doctype html>
 <html lang="en">
+  
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="Aman Turate">
     <title>Aman Turate - Resume</title>
-
-<link rel="stylesheet" href="/static/css/cover.css">
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static '/css/cover.css' %}">
 <link href="https://fonts.googleapis.com/css?family=Charm" rel="stylesheet">
     <!-- Font Awesome -->
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 <!-- Bootstrap core CSS -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 <!-- Material Design Bootstrap -->
@@ -33,7 +34,7 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-auto smooth-scroll">
                     <li class="nav-item">
-            <a class="nav-link" href="#about" data-offset="90">About</a>
+            <a class="nav-link active" href="#about" data-offset="90">About</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#experience" data-offset="90">Experience</a>
@@ -42,10 +43,10 @@
             <a class="nav-link" href="#project" data-offset="90">Projects</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#skills" data-offset="30">Skills</a>
+            <a class="nav-link" href="#award" data-offset="90">Recognition</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#award" data-offset="90">Awards</a>
+            <li class="nav-item">
+            <a class="nav-link" href="#skills" data-offset="30">Skills</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#contact" data-offset="90">Contact</a>
@@ -55,12 +56,12 @@
         <ul class="navbar-nav nav-flex-icons">
           <li class="nav-item">
             <a class="nav-link" href="https://www.linkedin.com/in/aman-turate/" target="_blank">
-              <i class="fab fa-linkedin-in light-green-text-2"></i>
+              <i class="fab fa-linkedin-in light-green-text-2">Linkedin</i>
             </a>
           </li>
-          <li class="nav-item" href="https://github.com/amanturate" target="_blank">
-            <a class="nav-link">
-              <i class="fab fa-github light-green-text-2"></i>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/amanturate" target="_blank">
+              <i class="fab fa-github light-green-text-2">Github</i>
             </a>
           </li>
           <li class="nav-item">
@@ -76,7 +77,7 @@
   <!-- Full Page Intro -->
   <div class="view" id="intro" >
     <!-- Mask & flexbox options-->
-    <div class="mask rgba-gradient d-flex justify-content-center align-items-center">
+    <div class="mask rgba-gradient d-flex justify-content-center align-items-center" >
       <!-- Content -->
       <div class="container px-md-3 px-sm-0">
         <!--Grid row-->
@@ -94,10 +95,11 @@
 
               </h4>
 
-
-            <a href="/static/files/CV.pdf" class="btn btn-rounded btn-outline-white mt-3">
+              {%for job in jobs.all%}
+            <a href="{{job.resume.url}}" class="btn btn-rounded btn-outline-white mt-3" download = "Aman_Turate's_CV">
               <i class="far fa-file-pdf"></i> Resume
             </a>
+              {%endfor%}
           </div>
           <!--Grid column-->
         </div>
@@ -114,7 +116,7 @@
 <main data-spy="scroll" data-target="#navbar-example2" data-offset="0">
 
     <!--Section: about-->
-    <section id="about" class="text-justify py-5" >
+    <section id="about" class="text-justify py-5" style="background-color: #eee">
 
         <!-- Container -->
         <div class="container ">
@@ -141,7 +143,7 @@
 
                                 <!-- Grid column -->
                                 <div class="col-1">
-                                    <i class="far fa-hand-point-right blue-text fa-lg"></i>
+                                    <i class="far fa-hand-point-right text-blue fa-lg"></i>
                                 </div>
 
                                 <!-- Grid column -->
@@ -164,26 +166,26 @@
     <!--Section: about-->
 
     <!--Section: experience-->
-    <section id="experience" class="text-center py-5" style="background-color: #eee;" >
+    <section id="experience" class="text-center py-5 rgba-gradient"  style="background-color: transparent">
 
         <!-- Container -->
-        <div class="container">
+        <div class="container" >
 
             <!-- Section heading -->
-            <h2 class="h1-responsive font-weight-bold mb-5">Experience</h2>
+            <h2 class="h1-responsive font-weight-bold mb-5 text-white">Experience</h2>
             <!-- Section description -->
             {% for exps in exp.all|dictsortreversed:"start_dt"%}
-                <div class="card text-white bg-info text-center col-lg-6">
+                <div class="card text-black bg-info text-center col-lg-6" style="background-image: url({% static '/images/card-bg.jpg'%})">
                     <div class="card-header lead">
                         {{exps.company}}
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">{{exps.position}}</h5>
-                        <p class="card-text text-white">
+                        <p class="card-text text-black">
                                 location : {{exps.location}}
                         </p>
                     </div>
-                    <div class="card-footer">
+                    <div class="card-footer text-muted">
                         {{exps.start_dt |date:"M/Y"}} - {%if exps.now == True %}Now {%else%} {{exps.end_dt |date:"M/Y"}} {%endif%}
                     </div>
                 </div>  
@@ -195,7 +197,7 @@
     <!--Section: projects-->
 
     <!--Section: gallery-->
-    <section id="project" class="text-center py-5">
+    <section id="project" class="text-center py-5" style="background-color: #eee">
 
         <!-- Container -->
         <div class="container">
@@ -205,10 +207,10 @@
             <!-- Section description -->
             <div class="accordion" id="accordionExample">
               {%for proj in proj.all|dictsortreversed:"start_dt"%}
-              <div class="card bg-primary">
+              <div class="card bg-primary" style="background-image: url({% static '/images/card-bg.jpg'%})">
                 <div class="card-header" id="_{{forloop.counter}}">
                   <h2 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#card_{{forloop.counter}}" aria-expanded="false" aria-controls="card_{{forloop.counter}}" style="color: ghostwhite !important">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#card_{{forloop.counter}}" aria-expanded="false" aria-controls="card_{{forloop.counter}}" style="color: black!important">
                        {{proj.name}}
                     </button>
                   </h2>
@@ -224,7 +226,7 @@
                             <i class="far fa-hand-point-right text-white fa-lg"></i>
                           </div>
                           <div clas="col-10" style="text-align: left;">
-                            <p class="text-white">{{proj.desc_1}}</p>
+                            <p class="text-black">{{proj.desc_1}}</p>
                           </div>
                         </div>
                         {%endif%}
@@ -235,7 +237,7 @@
                             <i class="far fa-hand-point-right text-white fa-lg"></i>
                           </div>
                           <div clas="col-10" style="text-align: left;">
-                            <p class="text-white">{{proj.desc_2}}</p>
+                            <p class="text-black">{{proj.desc_2}}</p>
                           </div>
                         </div>
                         {%endif%}
@@ -246,7 +248,7 @@
                             <i class="far fa-hand-point-right text-white fa-lg"></i>
                           </div>
                           <div clas="col-10" style="text-align: left;">
-                            <p class="text-white">{{proj.desc_3}}</p>
+                            <p class="text-black">{{proj.desc_3}}</p>
                           </div>
                         </div>
                         {%endif%}
@@ -267,7 +269,72 @@
     </section>
     <!--Section: gallery-->
 
-    <!--Section: testimonials-->
+   
+    <!--Section: articles-->
+    <section id="award" class="text-center py-5 rgba-gradient" style="background-color: transparent">
+
+        <!-- Container -->
+        <div class="container" >
+
+            <!-- Section heading -->
+            <h2 class="h1-responsive font-weight-bold mb-5 text-white">Recognitions</h2>
+    <div class="row pt-5 m-auto">
+    {%for awards in awards.all|dictsortreversed:"date"%}   
+        <div class="col-md-6 col-lg-4 pb-3 text-center">
+
+        <div class="card card-custom bg-white border-white border-0">
+        <div class="card-custom-img" style="background-image: url({% static '/images/card-bg.jpg'%})"></div>
+        <div class="card-custom-avatar">
+        {%if awards.award %}
+        <img class="img-fluid" src="{% static '/images/award.png'%}" alt="Avatar" />
+        {%else%}
+        <img class="img-fluid" src="{% static '/images/cert.png'%}" alt="Avatar" />
+        {%endif%}
+        </div>
+        <div class="card-body" style="overflow-y: auto; ">
+        <h4 class="card-title" style="font-size: 1.3rem">{{awards.company}} - <br>{{awards.name}}</h4>
+        <p class="card-text">{{awards.Description}}</p>
+        {{awards.date|date:"Y"}}
+        </div>
+        <div class="card-footer" style="background: inherit; border-color: inherit;">
+            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#cert_{{forloop.counter}}">Certificate</a>
+        
+        </div>
+        <div id="cert_{{forloop.counter}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="cert_{{forloop.counter}}" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="img">
+        <div class="modal-content bg-info">
+        <div class="modal-body" >
+        {%if awards.cert.url != ""%}
+        <img src="{{awards.cert.url}}" class="img-responsive" style="height: 100%; width: 100%;">
+        {%else%}
+        <p class="text-white">No image</p>
+        {%endif%}
+        </div>
+        <div class="modal-footer">
+        {%if awards.cert.url != ""%}
+        <form method="get" action="{{awards.cert.url}}">
+        <button type="submit" class="btn btn-info text-white">View Certificate</button>
+        </form>
+        {%endif%}
+        <button type="button" class="btn btn-info text-white" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+        </div>
+        </div>
+       
+        </div>
+
+        </div>
+         {%endfor%}
+    </div>
+
+        </div>
+        <!-- Container -->
+
+    </section>
+    <!--Section: articles-->
+
+     <!--Section: testimonials-->
     <section id="skills" class="text-center py-5" style="background-color: #eee;">
 
         <!-- Container -->
@@ -278,9 +345,9 @@
 
           <div class="row text-center">
             {%for skills in skill.all%}
-            <div class="col-4 text-center my-auto">
-              <div class="card bg-info card-block d-flex">
-                <div class="card-body align-items-center d-flex text-white justify-content-center">
+            <div class="col-3 text-center my-auto">
+              <div class="card bg-info card-block d-flex" style="background-image: url({% static '/images/card-bg.jpg'%})">
+                <div class="card-body align-items-center d-flex justify-content-center">
                   {{skills.name}}
                 </div>
               </div>
@@ -292,57 +359,11 @@
 
     </section>
 
-    <!--Section: articles-->
-    <section id="award" class="text-center py-5">
-
-        <!-- Container -->
-        <div class="container">
-
-            <!-- Section heading -->
-            <h2 class="h1-responsive font-weight-bold mb-5">Awards</h2>
-              <div class="row">
-                {%for awards in awards.all%}
-              <div class="card bg-primary text-center col-6 text-white">
-                <div class="card-header">
-                  {{awards.company}}
-                </div>
-                <div class="card-body ">
-                  <h5 class="card-title">{{awards.name}}</h5>
-                  <p class="card-text text-white">{{awards.Description}}</p>
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cert_{{forloop.counter}}">Certificate</button>
-                </div>
-                <div class="card-footer">
-                  {{awards.date|date:"Y"}}
-                </div>
-              </div>
-                <div id="cert_{{forloop.counter}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="cert_{{forloop.counter}}" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="img">
-              <div class="modal-content bg-info">
-                  <div class="modal-body">
-                    <img src="{{awards.cert.url}}" class="img-responsive" style="height: 100%; width: 100%;">
-                  </div>
-                <div class="modal-footer">
-                  <form method="get" action="{{awards.cert.url}}">
-                  <button type="submit" class="btn btn-info text-white">View Certificate</button>
-                  </form>
-        <button type="button" class="btn btn-info text-white" data-dismiss="modal">Close</button>
-                </div>
-              </div>
-            </div>
-          </div>
-                {% endfor %}
-          </div>
-          
-        </div>
-        <!-- Container -->
-
-    </section>
-    <!--Section: articles-->
-
+    
     <!--Section: contact-->
-    <section id="contact" class="py-5" style="background-color: #eee;">
+    <section id="contact" class="py-5" style="background-color: transparent">
 
-        <div class="container">
+        <div class="container text-white">
           <h2 class="h1-responsive font-weight-bold mb-5 text-center">Contact</h2>
           <p class="lead">Aman Turate</p>
           <p class="lead">turateaman1995@gmail.com</p>

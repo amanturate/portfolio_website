@@ -5,8 +5,7 @@ class Summary(models.Model):
     summary = models.TextField()
 
 class Job(models.Model):
-    image = models.ImageField(upload_to = 'images/')
-    summary = models.CharField(max_length = 200)
+    resume = models.FileField(upload_to = 'files/',default="")
 
 class Experience(models.Model):
     company = models.CharField(max_length=50)
@@ -34,3 +33,4 @@ class Awards(models.Model):
     Description = models.TextField(default="")
     date = models.DateField()
     cert = models.ImageField(upload_to = 'images/',blank=True)
+    award = models.BooleanField(default = False, help_text = "Check if this is award" )
