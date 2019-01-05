@@ -96,7 +96,7 @@
               </h4>
 
               {%for job in jobs.all%}
-            <a href="{{job.resume.url}}" class="btn btn-rounded btn-outline-white mt-3" download = "Aman_Turate's_CV">
+            <a href="{{job.resume.url}}" class="btn btn-rounded btn-outline-white mt-3" download = "Aman_Turate's_CV.pdf">
               <i class="far fa-file-pdf"></i> Resume
             </a>
               {%endfor%}
@@ -131,7 +131,7 @@
 
                     <!-- Grid column -->
                     <div class="col-lg-5 text-center mb-2" >
-                        <img class="img-fluid " src="/static/images/robot_bg.jpg" alt="Sample image" >
+                        <img class="img-fluid " src="/static/images/ml_bg.png" alt="Sample image" >
                     </div>
                     <!-- Grid column -->
 
@@ -345,7 +345,7 @@
 
           <div class="row text-center">
             {%for skills in skill.all%}
-            <div class="col-3 col-sm-4 col-xs-4 text-center my-auto">
+            <div class="col-lg-3 col-xl-3 col-sm-4 col-xs-4 text-center my-auto">
               <div class="card bg-info card-block d-flex" style="background-image: url({% static '/images/card-bg.jpg'%})">
                 <div class="card-body align-items-center d-flex justify-content-center">
                   {{skills.name}}
